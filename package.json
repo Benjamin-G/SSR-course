@@ -4,8 +4,9 @@
   "description": "Server side rendering project",
   "main": "index.js",
   "scripts": {
+    "dev:build:server": "webpack --config webpack.server.js"
   },
-  "author": "",
+  "author": "Benjamin Geyer",
   "license": "ISC",
   "dependencies": {
     "axios": "0.16.2",
