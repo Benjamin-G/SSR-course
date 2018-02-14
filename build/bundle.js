@@ -7055,14 +7055,32 @@ module.exports = memoizeStringOnly;
 "use strict";
 
 
-var express = __webpack_require__(53);
-var React = __webpack_require__(20);
-var renderToString = __webpack_require__(111).renderToString;
-var Home = __webpack_require__(120).default;
-var app = express();
+var _express = __webpack_require__(53);
+
+var _express2 = _interopRequireDefault(_express);
+
+var _react = __webpack_require__(20);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(111);
+
+var _Home = __webpack_require__(120);
+
+var _Home2 = _interopRequireDefault(_Home);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// const express = require('express')
+// const React = require('react')
+// const renderToString = require('react-dom/server').renderToString
+// const Home = require('./client/components/Home').default
+// ^^^ We do not need this because of webpack/babel
+
+var app = (0, _express2.default)();
 
 app.get('/', function (req, res) {
-  var content = renderToString(React.createElement(Home, null));
+  var content = (0, _server.renderToString)(_react2.default.createElement(_Home2.default, null));
 
   res.send(content);
 });
@@ -22812,7 +22830,18 @@ var Home = function Home() {
   return _react2.default.createElement(
     'div',
     null,
-    'I\'m the home component'
+    _react2.default.createElement(
+      'div',
+      null,
+      'I\'m the BEST home component This is now working with live reload'
+    ),
+    _react2.default.createElement(
+      'button',
+      { onClick: function onClick() {
+          return console.log('Hi there!');
+        } },
+      'Press me!'
+    )
   );
 };
 
