@@ -3,6 +3,7 @@
 // const renderToString = require('react-dom/server').renderToString
 // const Home = require('./client/components/Home').default
 // ^^^ We do not need this because of webpack/babel
+import 'babel-polyfill'
 import express from 'express'
 import renderer from './helpers/renderer'
 import createStore from './helpers/createStore'
