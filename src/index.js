@@ -5,6 +5,9 @@
 // ^^^ We do not need this because of webpack/babel
 import 'babel-polyfill'
 import express from 'express'
+import { matchRoutes } from 'react-router-config'
+
+import Routes from './client/Routes'
 import renderer from './helpers/renderer'
 import createStore from './helpers/createStore'
 
@@ -15,7 +18,11 @@ app.use(express.static('public'))
 app.get('*', (req, res) => {
   const store = createStore()
 
-  //Logic to intialize and load data into store
+  const promises = matchRoutes(Routes, req.path).map(({ route }) => {
+    return route.loadData ? route.loadData(store) : null 
+  })
+
+  console.log(promises)
 
   res.send(renderer(req, store))
 })
