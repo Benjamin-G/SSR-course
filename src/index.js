@@ -22,6 +22,7 @@ app.get('*', (req, res) => {
     return route.loadData ? route.loadData(store) : null 
   })
 
+  //action creator and dispatch manual so when we render the site the store has data
   Promise.all(promises).then(() => {
     res.send(renderer(req, store))
   })
