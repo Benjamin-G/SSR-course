@@ -9,4 +9,4 @@ const Home = () => {
   )
 }
 
-export default { componenet: Home }
+export default { component: Home }

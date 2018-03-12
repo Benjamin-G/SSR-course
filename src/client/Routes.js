@@ -2,14 +2,20 @@ import React from 'react'
 
 import UsersListPage from './pages/UsersListPage'
 import HomePage from './pages/HomePage'
+import App from './App'
 
 export default [
   {
-    ...HomePage,
-    path: '/',
-    exact: true
-  },{
-    ...UsersListPage,
-    path: '/users'
+    ...App,
+    routes: [
+      {
+        ...HomePage,
+        path: '/',
+        exact: true
+      },{
+        ...UsersListPage,
+        path: '/users'
+      }
+    ]
   }
 ]
