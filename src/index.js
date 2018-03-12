@@ -6,12 +6,21 @@
 import 'babel-polyfill'
 import express from 'express'
 import { matchRoutes } from 'react-router-config'
+import proxy from 'express-http-proxy'
 
 import Routes from './client/Routes'
 import renderer from './helpers/renderer'
 import createStore from './helpers/createStore'
 
 const app = express()
+
+//on all calls to "/api/..." => proxy to handle cookie for Oauth
+app.use('/api', proxy('http://react-ssr-api.herokuapp.com', {
+  proxyReqOptDecorator(opts) {
+    opts.header['x-forwarded-host'] = 'localhost:3000'
+    return opts
+  }
+}))
 
 app.use(express.static('public'))
 
