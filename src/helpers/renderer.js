@@ -19,14 +19,17 @@ export default (req, store) => {
   return `
     <html>
       <head>
-        <body>
-          <div id="root">${content}</div>
-          <script>
-            window.INITIAL_STATE = ${serialize(store.getState())}
-          </script>
-          <script src="bundle.js"></script>
-        </body>
+      <!-- Compiled and minified CSS materializecss-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
       </head>
+    
+      <body>
+        <div id="root">${content}</div>
+        <script>
+          window.INITIAL_STATE = ${serialize(store.getState())}
+        </script>
+        <script src="bundle.js"></script>
+      </body>
     </html>
   `
 }
