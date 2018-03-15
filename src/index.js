@@ -29,12 +29,24 @@ app.get('*', (req, res) => {
 
   const promises = matchRoutes(Routes, req.path).map(({ route }) => {
     return route.loadData ? route.loadData(store) : null 
-  })
+  }).map(promise => {
+    if(promise){
+      return new Promise((res, rej) => {
+        promise.then(res).catch(res)
+      })
+    }
+  }) //Wrapping the inner promises with a promise that is always resolved
 
   //action creator and dispatch manual so when we render the site the store has data
   Promise.all(promises).then(() => {
     const context = {}
     const content = renderer(req, store, context)
+
+
+    //redirects from the server if not logged in
+    if(context.url){
+      return res.redirect(301, context.url)
+    }
 
     if(context.notFound) {
       res.status(404)
@@ -42,6 +54,8 @@ app.get('*', (req, res) => {
 
     res.send(content)
   })
+  //using .catch() would abandon the server side rendering Error Handling 1
+  //could create a render functions and always render something Error Handling 1
 })
 
 app.listen(3000, () => {
