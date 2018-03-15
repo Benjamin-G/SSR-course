@@ -1,6 +1,7 @@
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Helmet } from 'react-helmet'
+
 import { fetchUsers } from '../actions'
 
 class UsersList extends Component {
@@ -17,6 +18,10 @@ class UsersList extends Component {
   render () {
     return (
       <div>
+        <Helmet>
+          <title>Users App</title>
+          <meta property="og:title" content="Users App" />
+        </Helmet>
         <h3>Here is a big list of users:</h3>
         <ul>{this.renderUsers()}</ul>
       </div>
