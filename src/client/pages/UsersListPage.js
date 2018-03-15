@@ -17,7 +17,7 @@ class UsersList extends Component {
   render () {
     return (
       <div>
-        Here is a big list of users:
+        <h3>Here is a big list of users:</h3>
         <ul>{this.renderUsers()}</ul>
       </div>
     )
