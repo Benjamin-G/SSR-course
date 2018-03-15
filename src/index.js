@@ -33,7 +33,14 @@ app.get('*', (req, res) => {
 
   //action creator and dispatch manual so when we render the site the store has data
   Promise.all(promises).then(() => {
-    res.send(renderer(req, store))
+    const context = {}
+    const content = renderer(req, store, context)
+
+    if(context.notFound) {
+      res.status(404)
+    }
+
+    res.send(content)
   })
 })
 
